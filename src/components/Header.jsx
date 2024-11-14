@@ -1,6 +1,6 @@
 import React from 'react';
-import { FaHome, FaUtensils, FaConciergeBell, FaPhone } from 'react-icons/fa';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom for navigation
+import { FaHome, FaUtensils, FaConciergeBell, FaPhone, FaInfoCircle } from 'react-icons/fa'; // Added FaInfoCircle for About
+import { Link } from 'react-router-dom'; // Import Link for navigation
 
 const Header = () => {
   return (
@@ -16,7 +16,7 @@ const Header = () => {
         <ul className="flex flex-col items-center mt-10 space-y-6 w-full">
           {/* Home Icon */}
           <li className="flex items-center p-2 w-full text-primaryGreen hover:bg-accentGold transition-colors duration-300 relative">
-            <Link to="/" className="flex items-center w-full"> {/* Link added for navigation */}
+            <Link to="/" className="flex items-center w-full">
               <FaHome size={24} />
               <span className="absolute left-16 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-primaryGreen">
                 Home
@@ -24,9 +24,19 @@ const Header = () => {
             </Link>
           </li>
 
+          {/* About Icon */}
+          <li className="flex items-center p-2 w-full text-primaryGreen hover:bg-accentGold transition-colors duration-300 relative">
+            <Link to="/about" className="flex items-center w-full">
+              <FaInfoCircle size={24} /> {/* About Icon */}
+              <span className="absolute left-16 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-primaryGreen">
+                About
+              </span>
+            </Link>
+          </li>
+
           {/* Menu Icon */}
           <li className="flex items-center p-2 w-full text-primaryGreen hover:bg-accentGold transition-colors duration-300 relative">
-            <Link to="/menu" className="flex items-center w-full"> {/* Link added for navigation */}
+            <Link to="/menu" className="flex items-center w-full">
               <FaUtensils size={24} />
               <span className="absolute left-16 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-primaryGreen">
                 Menu
@@ -36,7 +46,7 @@ const Header = () => {
 
           {/* Services Icon */}
           <li className="flex items-center p-2 w-full text-primaryGreen hover:bg-accentGold transition-colors duration-300 relative">
-            <Link to="/services" className="flex items-center w-full"> {/* Link added for navigation */}
+            <Link to="/services" className="flex items-center w-full">
               <FaConciergeBell size={24} />
               <span className="absolute left-16 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-primaryGreen">
                 Services
@@ -46,7 +56,7 @@ const Header = () => {
 
           {/* Contact Icon */}
           <li className="flex items-center p-2 w-full text-primaryGreen hover:bg-accentGold transition-colors duration-300 relative">
-            <Link to="/contact" className="flex items-center w-full"> {/* Link added for navigation */}
+            <Link to="/contact" className="flex items-center w-full">
               <FaPhone size={24} />
               <span className="absolute left-16 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-primaryGreen">
                 Contact
