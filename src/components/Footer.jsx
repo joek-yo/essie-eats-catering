@@ -1,4 +1,3 @@
-// Footer.jsx
 import React from 'react';
 import { FaFacebook, FaInstagram, FaTwitter, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
 
@@ -28,7 +27,7 @@ const Footer = () => {
         </div>
 
         {/* Social Media Links */}
-        <div className="flex justify-center md:justify-start space-x-6">
+        <div className="flex justify-center md:justify-start space-x-6 mb-6">
           <a href="#" className="text-primaryGreen hover:text-accentGold">
             <FaFacebook size={24} />
           </a>
@@ -40,8 +39,16 @@ const Footer = () => {
           </a>
         </div>
 
+        {/* Footer Links (e.g., Privacy, About Us) */}
+        <div className="text-center md:text-left mb-6">
+          <a href="/about-us" className="text-primaryGreen hover:text-accentGold mr-6">About Us</a>
+          <a href="/faq" className="text-primaryGreen hover:text-accentGold mr-6">FAQ</a>
+          <a href="/privacy-policy" className="text-primaryGreen hover:text-accentGold mr-6">Privacy Policy</a>
+          <a href="/terms-of-service" className="text-primaryGreen hover:text-accentGold">Terms of Service</a>
+        </div>
+
         {/* Copyright */}
-        <div className="text-center mt-6 text-gray-400">
+        <div className="text-center text-gray-400">
           <p>&copy; {new Date().getFullYear()} Royal Essie Catering. All rights reserved.</p>
         </div>
       </div>

@@ -1,83 +1,90 @@
-// Contact.jsx
-import React, { useState } from 'react';
-
-const Contact = () => {
+const ContactForm = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [errors, setErrors] = useState({});
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleInputChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const validateForm = () => {
+    const validationErrors = {};
+    if (!formData.name) validationErrors.name = 'Name is required';
+    if (!formData.email) validationErrors.email = 'Email is required';
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) validationErrors.email = 'Email is invalid';
+    if (!formData.message) validationErrors.message = 'Message is required';
+
+    setErrors(validationErrors);
+    return Object.keys(validationErrors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form data:', formData);
-    // You can add further actions here (like sending data to a server).
-    alert("Thank you for reaching out. We'll get back to you soon!");
-    setFormData({ name: '', email: '', message: '' });
+    if (validateForm()) {
+      setIsLoading(true);
+      try {
+        console.log('Form submitted', formData);
+        setSubmitSuccess(true);
+        setFormData({ name: '', email: '', message: '' });
+      } catch (error) {
+        console.error('Error submitting form', error);
+        setSubmitSuccess(false);
+      } finally {
+        setIsLoading(false);
+      }
+    }
   };
 
   return (
-    <div className="flex flex-col items-center px-8 py-12 bg-gray-100 min-h-screen">
-      <h2 className="text-4xl font-bold text-primaryGreen mb-8">Contact Us</h2>
-
-      {/* Contact Form */}
-      <form className="w-full max-w-lg bg-white shadow-md rounded-lg p-6 mb-12" onSubmit={handleSubmit}>
+    <div className="max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-lg mt-12">
+      <h2 className="text-3xl font-semibold text-primaryGreen mb-6">Contact Us</h2>
+      {submitSuccess && <p className="text-green-600 mb-4">Your message has been sent successfully!</p>}
+      <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <label className="block text-darkGray font-semibold mb-2" htmlFor="name">Name</label>
+          <label htmlFor="name" className="block text-gray-700 font-medium mb-2">Name</label>
           <input
             type="text"
             id="name"
             name="name"
             value={formData.name}
-            onChange={handleInputChange}
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primaryGreen"
-            required
+            onChange={handleChange}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primaryGreen"
           />
+          {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
         </div>
         <div className="mb-4">
-          <label className="block text-darkGray font-semibold mb-2" htmlFor="email">Email</label>
+          <label htmlFor="email" className="block text-gray-700 font-medium mb-2">Email</label>
           <input
             type="email"
             id="email"
             name="email"
             value={formData.email}
-            onChange={handleInputChange}
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primaryGreen"
-            required
+            onChange={handleChange}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primaryGreen"
           />
+          {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
         </div>
-        <div className="mb-6">
-          <label className="block text-darkGray font-semibold mb-2" htmlFor="message">Message</label>
+        <div className="mb-4">
+          <label htmlFor="message" className="block text-gray-700 font-medium mb-2">Message</label>
           <textarea
             id="message"
             name="message"
             value={formData.message}
-            onChange={handleInputChange}
+            onChange={handleChange}
             rows="4"
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primaryGreen"
-            required
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primaryGreen"
           />
+          {errors.message && <p className="text-red-500 text-sm">{errors.message}</p>}
         </div>
         <button
           type="submit"
-          className="bg-primaryGreen text-white font-semibold py-2 px-4 rounded-lg hover:bg-accentGold transition-colors duration-300"
+          className="w-full bg-primaryGreen text-white p-3 rounded-lg hover:bg-accentGold transition duration-300"
         >
-          Send Message
+          {isLoading ? 'Sending...' : 'Send Message'}
         </button>
       </form>
-
-      {/* Contact Information */}
-      <div className="text-center">
-        <p className="text-darkGray font-semibold">Phone: <span className="text-primaryGreen">+123 456 7890</span></p>
-        <p className="text-darkGray font-semibold">Email: <span className="text-primaryGreen">info@royalessie.com</span></p>
-        <p className="text-darkGray font-semibold">Address: <span className="text-primaryGreen">123 Catering Lane, Food City</span></p>
-      </div>
     </div>
   );
 };
-
-export default Contact;
