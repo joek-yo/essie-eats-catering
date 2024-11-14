@@ -1,13 +1,25 @@
-import Layout from './components/Layout.jsx';
+// src/App.jsx
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Header from './components/Header';
+import HeroSection from './components/HeroSection';
+import ServicesSection from './components/ServicesSection';
+import Footer from './components/Footer';
 
-function App() {
+const App = () => {
   return (
-    <Layout>
-      <section id="hero" className="bg-accentGold h-96 flex items-center justify-center">
-        <h1 className="text-4xl font-bold text-white">Welcome to Royal Essie Catering</h1>
-      </section>
-    </Layout>
+    <Router>
+      <Header />
+      <div className="pl-16 md:pl-20"> {/* Adjust padding to align with sidebar */}
+        <Routes>
+          <Route path="/" element={<HeroSection />} />
+          {/* Add other routes for additional pages here */}
+        </Routes>
+        <ServicesSection />
+        <Footer />
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
