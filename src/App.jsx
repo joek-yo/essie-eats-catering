@@ -2,6 +2,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header'; 
+import Footer from './components/Footer'; // Import the Footer component
 import HomePage from './pages/HomePage'; 
 import Menu from './pages/Menu';
 import Services from './pages/Services';
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/services" element={<Services />} /> {/* Services route */}
         <Route path="/contact" element={<Contact />} /> {/* Contact route */}
       </Routes>
+      <Footer /> {/* Include the Footer at the bottom */}
     </Router>
   );
 };
