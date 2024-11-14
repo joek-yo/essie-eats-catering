@@ -1,23 +1,22 @@
 // src/App.jsx
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Header from './components/Header';
-import HeroSection from './components/HeroSection';
-import ServicesSection from './components/ServicesSection';
-import Footer from './components/Footer';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './components/Header'; // Import the header component
+import HomePage from './pages/HomePage'; // Ensure these pages exist
+import Menu from './pages/Menu';
+import Services from './pages/Services';
+import Contact from './pages/Contact';
 
 const App = () => {
   return (
     <Router>
-      <Header />
-      <div className="pl-16 md:pl-20"> {/* Adjust padding to align with sidebar */}
-        <Routes>
-          <Route path="/" element={<HeroSection />} />
-          {/* Add other routes for additional pages here */}
-        </Routes>
-        <ServicesSection />
-        <Footer />
-      </div>
+      <Header /> {/* Include the header for navigation */}
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/menu" element={<Menu />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
     </Router>
   );
 };
